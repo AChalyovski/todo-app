@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const TodoList = () =>{
-    const [items, setItems] = useState(null);
-    useEffect(() => {
-        axios
-            .get('http://localhost:3001/api/items')
-            .then((res) => console.log(res));
-        }, [])
+    const [todos, setTodos] = useState([]);
 
-    if(items === null) return <div>loading...</div>
+    useEffect(()=>{
+        fetch('http://localhost:3000/todos')
+            .then(data => data.json())
+            .then((data) => setTodos(data))
+    },[])
 
-    return <div>{
-        items.map((item)=>{
-            <div>{item.name}</div>
-            })
-    }</div>;
+    // if(todos === undefined) return <p>loading...</p>
+
+    console.log("Todos: ", todos);
+    console.log("Todos length: ", todos.title);
+    console.log("Todos type: ", typeof todos);
+    // TODO: Make interface for todos object
+    return (
+        <div>
+            {todos.map(item => (
+                <p key={item.id}>{item.title}</p>
+            ))}
+        </div>
+    )
 };
 export default TodoList;
