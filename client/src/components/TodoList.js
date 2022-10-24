@@ -10,11 +10,8 @@ const TodoList = () =>{
             .then((data) => setTodos(data))
     },[])
 
-    // if(todos === undefined) return <p>loading...</p>
+    if(todos === []) return <p>loading...</p>
 
-    console.log("Todos: ", todos);
-    console.log("Todos length: ", todos.title);
-    console.log("Todos type: ", typeof todos);
     // TODO: Make interface for todos object
     return (
         <div>
