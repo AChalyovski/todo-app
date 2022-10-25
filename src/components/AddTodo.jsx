@@ -21,7 +21,7 @@ const AddTodo = (props = (todos, setTodos)) => {
         axios
             .post(import.meta.env.VITE_TODO_API, data)
             .then((res) => props.setTodos([...props.todos, res.data]))
-            .then(navigateTo('/home'));
+            .then(navigateTo('/'));
     }
 
     return (
@@ -41,12 +41,20 @@ const AddTodo = (props = (todos, setTodos)) => {
                     onChange={(event) => setNewDescription(event.target.value)}
                 />
                 <br/>
-                <input
-                    type="text"
-                    placeholder={"Priority"}
-                    value={priority}
-                    onChange={(event) => setPriority(event.target.value)}
-                />
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    placeholder={"Priority"}*/}
+                {/*    value={priority}*/}
+                {/*    onChange={(event) => setPriority(event.target.value)}*/}
+                {/*/>*/}
+                <label>Priority</label>
+                <select id="priority" name="priority" onChange={(event) => setPriority(event.target.value)}>
+                    <option value="high">High</option>
+                    <option value="medium high">Medium High</option>
+                    <option value="medium">Medium</option>
+                    <option value="medium low">Medium Low</option>
+                    <option value="low">Low</option>
+                </select>
                 <br/>
                 <input type="submit" value="Submit"/>
             </form>

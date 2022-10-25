@@ -46,8 +46,18 @@ const App = () => {
                 </ul>
             </nav>
             <Routes>
-                <Route path="/" element={<TodoList todos={todos} isLoading={isLoading}/>}/>
-                <Route path="/home" element={<TodoList todos={todos} isLoading={isLoading}/>}/>
+                <Route path="/" element={
+                    <TodoList
+                        todos={todos}
+                        isLoading={isLoading}
+                        setIsLoading={setIsLoading}
+                    />
+                }/>
+                {/*<Route path="/home" element={*/}
+                {/*    <TodoList*/}
+                {/*        todos={todos}*/}
+                {/*        isLoading={isLoading}/>*/}
+                {/*}/>*/}
                 <Route path="/add" element={
                     <AddTodo
                         todos={todos}
