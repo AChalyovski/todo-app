@@ -1,3 +1,12 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1,
+      "title": "asd",
+      "description": "asd",
+      "completed": false,
+      "timeOfCompletion": null,
+      "priority": ""
+    }
+  ]
 }

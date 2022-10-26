@@ -41,12 +41,6 @@ const AddTodo = (props = (todos, setTodos)) => {
                     onChange={(event) => setNewDescription(event.target.value)}
                 />
                 <br/>
-                {/*<input*/}
-                {/*    type="text"*/}
-                {/*    placeholder={"Priority"}*/}
-                {/*    value={priority}*/}
-                {/*    onChange={(event) => setPriority(event.target.value)}*/}
-                {/*/>*/}
                 <label>Priority</label>
                 <select id="priority" name="priority" onChange={(event) => setPriority(event.target.value)}>
                     <option value="high">High</option>
