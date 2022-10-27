@@ -2,11 +2,19 @@
   "todos": [
     {
       "id": 1,
+      "title": "first todo",
+      "description": "go do this",
+      "completed": false,
+      "timeOfCompletion": null,
+      "priority": "medium"
+    },
+    {
+      "id": 2,
       "title": "asd",
       "description": "asd",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": ""
+      "priority": "low"
     }
   ]
 }

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import AddTodo from "./components/AddTodo";
 import axios from "axios";
+import {BsUiChecks, BsUiChecksGrid, BsPlusLg} from "react-icons/all";
 
 const App = () => {
 
@@ -25,22 +26,25 @@ const App = () => {
     }, [isLoading])
 
     return (
-        <>
-            <nav>
+        <div>
+            <nav className="bg-red-100 w-screen">
                 <ul>
                     <li>
-                        <Link to="/">
-                            Home
+                        <Link
+                            to="/">
+                            <BsUiChecks className="text-[30px] fill-red-900"/>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/add">
-                            Add
+                        <Link
+                            to="/">
+                            <BsUiChecksGrid className="text-[30px] fill-red-900"/>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/edit/edit">
-                            Edit
+                        <Link
+                            to="/add">
+                            <BsPlusLg className="text-[30px] fill-red-900"/>
                         </Link>
                     </li>
                 </ul>
@@ -53,11 +57,6 @@ const App = () => {
                         setIsLoading={setIsLoading}
                     />
                 }/>
-                {/*<Route path="/home" element={*/}
-                {/*    <TodoList*/}
-                {/*        todos={todos}*/}
-                {/*        isLoading={isLoading}/>*/}
-                {/*}/>*/}
                 <Route path="/add" element={
                     <AddTodo
                         todos={todos}
@@ -67,7 +66,7 @@ const App = () => {
                 <Route path="/edit/:id" element={<p>Edit Todo</p>}/>
                 <Route path="*" element={<p>404</p>}/>
             </Routes>
-        </>
+        </div>
     );
 }
 

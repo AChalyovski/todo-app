@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import {AiOutlineEdit, AiOutlineDelete, MdOutlineDone} from "react-icons/all";
 
 const TodoList = (props = (todos, isLoading, setIsLoading)) => {
     const handleDeleteTodo = (todoItem) => {
@@ -11,6 +12,10 @@ const TodoList = (props = (todos, isLoading, setIsLoading)) => {
 
     const handleEditTodo = (todoItem) => {
         console.log("Editing ", todoItem);
+    }
+
+    const handleCompleteTodo = (todoItem) => {
+        console.log("Completing ", todoItem);
     }
 
     // TODO: Make interface for todos object
@@ -26,17 +31,25 @@ const TodoList = (props = (todos, isLoading, setIsLoading)) => {
                             (
                                 <div>
                                     {props.todos.map(todoItem => (
-                                        <div key={todoItem.id} className="flex justify-between space-x-5">
+                                        <div key={todoItem.id}
+                                             className="flex justify-between space-x-5 border-solid border-2 border-indigo-600 my-2">
                                             <p>{todoItem.title}</p>
+                                            <p>{todoItem.description}</p>
+                                            <p>{todoItem.priority}</p>
                                             <button
                                                 className="bg-red-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-red-900"
                                                 onClick={() => handleDeleteTodo(todoItem)}>
-                                                X
+                                                <AiOutlineDelete/>
                                             </button>
                                             <button
                                                 className="bg-blue-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-blue-900"
                                                 onClick={() => handleEditTodo(todoItem)}>
-                                                Edit
+                                                <AiOutlineEdit/>
+                                            </button>
+                                            <button
+                                                className="bg-blue-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-blue-900"
+                                                onClick={() => handleCompleteTodo(todoItem)}>
+                                                <MdOutlineDone/>
                                             </button>
                                         </div>
                                     ))}
