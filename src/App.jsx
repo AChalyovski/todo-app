@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList/TodoList";
 import {
     Route,
     Routes,
@@ -7,12 +7,16 @@ import {
 } from "react-router-dom";
 import AddTodo from "./components/AddTodo";
 import axios from "axios";
-import {BsUiChecks, BsUiChecksGrid, BsPlusLg} from "react-icons/all";
+import {BsUiChecks, BsUiChecksGrid, BsPlusLg, FiSettings} from "react-icons/all";
+import DropdownMenu from "./components/DropdownMenu/DropdownMenu.jsx";
+import Navbar from "./components/Navbar/Navbar";
+import NavItem from "./components/NavItem/NavItem";
 
 const App = () => {
 
     const [todos, setTodos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isListView, setIsListView] = useState(true);
 
     const getAllTodos = () => {
         setIsLoading(true);
@@ -21,33 +25,34 @@ const App = () => {
             .then(setIsLoading(false));
     };
 
+    const changeViewOption = () => {
+        setIsListView(!isListView);
+    }
+
     useEffect(() => {
         getAllTodos();
     }, [isLoading])
 
     return (
         <div>
-            <nav className="bg-red-100">
-                <ul>
-                    <li>
+            <nav className="bg-red-100 flex justify-between p-[1rem]">
+                {isListView ?
+                    (
                         <Link
                             to="/">
-                            <BsUiChecks className="text-[3rem] fill-red-900"/>
+                            <BsUiChecksGrid className="text-[2rem] fill-red-900" onClick={changeViewOption}/>
                         </Link>
-                    </li>
-                    <li>
+                    ) : (
                         <Link
                             to="/">
-                            <BsUiChecksGrid className="text-[3rem] fill-red-900"/>
+                            <BsUiChecks className="text-[2rem] fill-red-900" onClick={changeViewOption}/>
                         </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/add">
-                            <BsPlusLg className="text-[3rem] fill-red-900"/>
-                        </Link>
-                    </li>
-                </ul>
+                    )}
+                <Navbar>
+                <NavItem icon={<FiSettings className="text-[2rem]"/>}>
+                          <DropdownMenu />
+                        </NavItem>
+                </Navbar>
             </nav>
             <Routes>
                 <Route path="/" element={
@@ -66,6 +71,16 @@ const App = () => {
                 <Route path="/edit/:id" element={<p>Edit Todo</p>}/>
                 <Route path="*" element={<p>404</p>}/>
             </Routes>
+
+            <div class="fab-container">
+                <div class="button iconButton">
+                    <Link
+                        to="/add"
+                        class="plusIcon">
+                        <BsPlusLg className="text-[1rem]"/>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }

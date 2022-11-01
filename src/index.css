@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .fab-container {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        cursor: pointer;
+    }
+
+    /*.iconButton {*/
+    /*    width: 2rem;*/
+    /*    height: 2rem;*/
+    /*    border-radius: 100%;*/
+    /*    background: #FF4F79;*/
+    /*    box-shadow: 0.3em 0.3em 0.4em #AAAAAA70;*/
+    /*}*/
+    .button {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 100%;
+        background: #60C689;
+        box-shadow: 0.3em 0.3em 0.4em #AAAAAA70;
+    }
+
+    .plusIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: white;
+    }
+}
