@@ -37,17 +37,17 @@ const TodoList = (props = (todos, isLoading, setIsLoading)) => {
                                             <p>{todoItem.description}</p>
                                             <p>{todoItem.priority}</p>
                                             <button
-                                                className="bg-red-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-red-900"
+                                                className="bg-red-500 text-white font-medium px-2 py-1 rounded hover:bg-red-900"
                                                 onClick={() => handleDeleteTodo(todoItem)}>
                                                 <AiOutlineDelete/>
                                             </button>
                                             <button
-                                                className="bg-blue-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-blue-900"
+                                                className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900"
                                                 onClick={() => handleEditTodo(todoItem)}>
                                                 <AiOutlineEdit/>
                                             </button>
                                             <button
-                                                className="bg-blue-500 text-white font-medium px-2 py-1 rounded -x1 hover:bg-blue-900"
+                                                className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900"
                                                 onClick={() => handleCompleteTodo(todoItem)}>
                                                 <MdOutlineDone/>
                                             </button>

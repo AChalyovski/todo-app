@@ -27,24 +27,24 @@ const App = () => {
 
     return (
         <div>
-            <nav className="bg-red-100 w-screen">
+            <nav className="bg-red-100">
                 <ul>
                     <li>
                         <Link
                             to="/">
-                            <BsUiChecks className="text-[30px] fill-red-900"/>
+                            <BsUiChecks className="text-[3rem] fill-red-900"/>
                         </Link>
                     </li>
                     <li>
                         <Link
                             to="/">
-                            <BsUiChecksGrid className="text-[30px] fill-red-900"/>
+                            <BsUiChecksGrid className="text-[3rem] fill-red-900"/>
                         </Link>
                     </li>
                     <li>
                         <Link
                             to="/add">
-                            <BsPlusLg className="text-[30px] fill-red-900"/>
+                            <BsPlusLg className="text-[3rem] fill-red-900"/>
                         </Link>
                     </li>
                 </ul>
