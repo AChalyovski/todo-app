@@ -1,31 +1,50 @@
-import React from 'react';
-import axios from "axios";
-import TodoItem from "./TodoItem.jsx"
+import { useEffect, useState } from "react";
+import TodoItem from "./TodoItem.jsx";
 
-const TodoList = (props = (todos, isLoading, setIsLoading)) => {
+const TodoList = ({ todos = [], isLoading }) => {
+    const [ongoingTodos, setOngoingTodos] = useState([]);
+    const [completedTodos, setCompletedTodos] = useState([]);
+
+    const showCompletedSetting = localStorage.getItem("completed");
+
+    useEffect(() => {
+        setOngoingTodos(todos.filter((item) => item.completed === false));
+        setCompletedTodos(todos.filter((item) => item.completed === true));
+    }, [todos]);
+
+    const show = showCompletedSetting && completedTodos.length;
+
+    console.log(show);
+
+    if (isLoading) {
+        return (
+            <div>
+                <p>Loading...</p>
+            </div>
+        );
+    }
+    if (todos.length === 0) {
+        return <p>No Data</p>;
+    }
     // TODO: Make interface for todos object
     return (
-        <div className="bg-purple-300">
-            {props.isLoading ?
-                (
-                    <p>Loading...</p>
-                ) : (
-                    <>
-                        <p>Todo list: </p>
-                        {props.todos.length ?
-                            (
-                                <div>
-                                    {props.todos.map(todoItem => (
-                                        <TodoItem key={todoItem.id} todoItem={todoItem}/>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p>No todos</p>
-                            )
-                        }
-                    </>
-                )}
+        <div>
+            <div className="p-4">
+                {ongoingTodos.map((todoItem) => (
+                    <TodoItem key={todoItem.id} todoItem={todoItem} />
+                ))}
+            </div>
+            {show === 1 && (
+                <div>
+                    <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
+                    <div className="p-4">
+                        {completedTodos.map((completedTodo) => (
+                            <TodoItem key={completedTodo.id} todoItem={completedTodo} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 };
 export default TodoList;

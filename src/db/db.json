@@ -2,27 +2,52 @@
   "todos": [
     {
       "id": 1,
-      "title": "first todo",
-      "description": "go do this",
+      "title": "123",
+      "description": "123",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": "medium"
+      "priority": "high"
     },
     {
       "id": 2,
-      "title": "asd",
-      "description": "asd",
+      "title": "123",
+      "description": "123",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": "low"
+      "priority": "medium high"
     },
     {
       "id": 3,
-      "title": "asd",
-      "description": "asd",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": ""
+      "title": "new way ",
+      "description": "new new way",
+      "priority": "medium",
+      "": "d"
+    },
+    {
+      "id": 4,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "asd",
+      "priority": "medium low"
+    },
+    {
+      "id": 5,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "asd",
+      "priority": "low"
+    },
+    {
+      "id": 7,
+      "completed": true,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "",
+      "priority": "low"
     }
   ]
 }

@@ -1,58 +1,64 @@
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddTodo = (props = (todos, setTodos)) => {
-    const [newTitle, setNewTitle] = useState("");
-    const [newDescription, setNewDescription] = useState("");
-    const [priority, setPriority] = useState("");
     const navigateTo = useNavigate();
+
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        priority: "low",
+    });
 
     const data = {
         id: props.todos.length + 1,
-        title: newTitle,
-        description: newDescription,
         completed: false,
         timeOfCompletion: null,
-        priority: priority,
-    }
+        ...formData,
+    };
+
+    const handleChange = (event) => {
+        setFormData((prev) => ({
+            ...prev,
+            [event.target.name]: event.target.value,
+        }));
+    };
 
     const handleCreateTodo = () => {
         axios
             .post(import.meta.env.VITE_TODO_API, data)
             .then((res) => props.setTodos([...props.todos, res.data]))
-            .then(navigateTo('/'));
-    }
+            .then(navigateTo("/"));
+    };
 
     return (
         <>
-            <form onSubmit={handleCreateTodo}>
+            <form id="todos-form" onSubmit={handleCreateTodo}>
+                <input type="text" name="title" placeholder={"To do"} value={formData.title} onChange={handleChange} />
+                <br />
                 <input
                     type="text"
-                    placeholder={"To do"}
-                    value={newTitle}
-                    onChange={(event) => setNewTitle(event.target.value)}
-                />
-                <br/>
-                <input
-                    type="text"
+                    name="description"
                     placeholder={"Description"}
-                    value={newDescription}
-                    onChange={(event) => setNewDescription(event.target.value)}
+                    value={formData.description}
+                    onChange={handleChange}
                 />
-                <br/>
+                <br />
                 <label>Priority</label>
-                <select id="priority" name="priority" onChange={(event) => setPriority(event.target.value)}>
+                <select id="priority" name="priority" onChange={handleChange}>
                     <option value="high">High</option>
                     <option value="medium high">Medium High</option>
                     <option value="medium">Medium</option>
                     <option value="medium low">Medium Low</option>
                     <option value="low">Low</option>
                 </select>
-                <br/>
-                <input type="submit" value="Submit"/>
+                <br />
             </form>
+            <button type="submit" form="todos-form">
+                Submit
+            </button>
         </>
-    )
+    );
 };
 export default AddTodo;
