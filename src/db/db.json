@@ -2,11 +2,52 @@
   "todos": [
     {
       "id": 1,
-      "title": "asd",
-      "description": "asd",
+      "title": "123",
+      "description": "123",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": ""
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "title": "123",
+      "description": "123",
+      "completed": false,
+      "timeOfCompletion": null,
+      "priority": "medium high"
+    },
+    {
+      "id": 3,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "new way ",
+      "description": "new new way",
+      "priority": "medium",
+      "": "d"
+    },
+    {
+      "id": 4,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "asd",
+      "priority": "medium low"
+    },
+    {
+      "id": 5,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "asd",
+      "priority": "low"
+    },
+    {
+      "id": 7,
+      "completed": true,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "",
+      "priority": "low"
     }
   ]
 }
