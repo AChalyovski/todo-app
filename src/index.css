@@ -6,7 +6,7 @@
     .fab-container {
         @apply fixed bottom-20 right-20 cursor-pointer
     }
-    
+
     .button {
         width: 3.5rem;
         height: 3.5rem;
@@ -23,7 +23,7 @@
         color: white;
     }
 
-    .table-cell {
-        @apply w-80
+    .todo-text {
+        @apply w-40 text-ellipsis overflow-hidden whitespace-nowrap
     }
 }

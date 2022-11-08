@@ -12,10 +12,6 @@ const TodoList = ({ todos = [], isLoading }) => {
         setCompletedTodos(todos.filter((item) => item.completed === true));
     }, [todos]);
 
-    const show = showCompletedSetting && completedTodos.length;
-
-    console.log(show);
-
     if (isLoading) {
         return (
             <div>
@@ -34,16 +30,14 @@ const TodoList = ({ todos = [], isLoading }) => {
                     <TodoItem key={todoItem.id} todoItem={todoItem} />
                 ))}
             </div>
-            {show === 1 && (
-                <div>
-                    <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
-                    <div className="p-4">
-                        {completedTodos.map((completedTodo) => (
-                            <TodoItem key={completedTodo.id} todoItem={completedTodo} />
-                        ))}
-                    </div>
+            <div>
+                <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
+                <div className="p-4">
+                    {completedTodos.map((completedTodo) => (
+                        <TodoItem key={completedTodo.id} todoItem={completedTodo} />
+                    ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

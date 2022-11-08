@@ -14,16 +14,7 @@
       "description": "123",
       "completed": false,
       "timeOfCompletion": null,
-      "priority": "medium high"
-    },
-    {
-      "id": 3,
-      "completed": false,
-      "timeOfCompletion": null,
-      "title": "new way ",
-      "description": "new new way",
-      "priority": "medium",
-      "": "d"
+      "priority": "medium_high"
     },
     {
       "id": 4,
@@ -31,7 +22,7 @@
       "timeOfCompletion": null,
       "title": "asd",
       "description": "asd",
-      "priority": "medium low"
+      "priority": "medium_low"
     },
     {
       "id": 5,
@@ -42,11 +33,27 @@
       "priority": "low"
     },
     {
-      "id": 7,
+      "id": 6,
       "completed": true,
       "timeOfCompletion": null,
       "title": "asd",
       "description": "",
+      "priority": "low"
+    },
+    {
+      "id": 7,
+      "completed": true,
+      "timeOfCompletion": null,
+      "title": "gfkajhsgfkjahgfakjhgkjhgkjashfgaskjhfgsakfjhsagfkjashfgsakjfh gfjhsagd fjkshagfksjahd fgsajkhfgsakjhfgskfjhagsfkjahsg fjkashgfaksjhfgsdakjh",
+      "description": "jhgaskjhfgaskjhfgaskjfhgasdkfjhags fjhasdgf kjashgfskjdhfgsakjhfgajkfhasgfkjhgOIYUOIUYROIWURYWOIEQURIOUYTWEUIRYTUIryutrasjdghsfkjhsadgfkgsadkuygckasudiycgsd uyicgas iducgsduicyg sdyucgsdi casdc",
+      "priority": "low"
+    },
+    {
+      "id": 8,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "kokokkkokokkokoko",
+      "description": "kurkurkrukrur",
       "priority": "low"
     }
   ]

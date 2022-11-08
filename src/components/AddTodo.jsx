@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AddTodo = (props = (todos, setTodos)) => {
+const AddTodo = (todos, setTodos) => {
     const navigateTo = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const AddTodo = (props = (todos, setTodos)) => {
     });
 
     const data = {
-        id: props.todos.length + 1,
+        id: todos.length + 1,
         completed: false,
         timeOfCompletion: null,
         ...formData,
@@ -25,40 +25,40 @@ const AddTodo = (props = (todos, setTodos)) => {
         }));
     };
 
-    const handleCreateTodo = () => {
+    const handleCreateTodo = (event) => {
+    //TODO: Use event.preventDefault()
         axios
             .post(import.meta.env.VITE_TODO_API, data)
-            .then((res) => props.setTodos([...props.todos, res.data]))
+            .then((res) => setTodos([...todos, res.data]))
             .then(navigateTo("/"));
     };
 
     return (
-        <>
-            <form id="todos-form" onSubmit={handleCreateTodo}>
-                <input type="text" name="title" placeholder={"To do"} value={formData.title} onChange={handleChange} />
-                <br />
+        <div className="p-10 flex flex-col items-center justify-center">
+        <p className="text-xl text-gray-500 font-bold text-center mb-10">Add New todo</p>
+            <form className="flex flex-col" id="todos-form" onSubmit={handleCreateTodo}>
+                <input className="mb-4" type="text" name="title" placeholder={"To do"} value={formData.title} onChange={handleChange} />
                 <input
                     type="text"
                     name="description"
                     placeholder={"Description"}
                     value={formData.description}
                     onChange={handleChange}
+                    className="mb-4"
                 />
-                <br />
                 <label>Priority</label>
                 <select id="priority" name="priority" onChange={handleChange}>
                     <option value="high">High</option>
-                    <option value="medium high">Medium High</option>
+                    <option value="medium_high">Medium High</option>
                     <option value="medium">Medium</option>
-                    <option value="medium low">Medium Low</option>
+                    <option value="medium_low">Medium Low</option>
                     <option value="low">Low</option>
                 </select>
-                <br />
             </form>
-            <button type="submit" form="todos-form">
+            <button className="bg-[#60C689] text-white font-medium px-2 py-1 mt-10 rounded hover:bg-blue-900" type="submit" form="todos-form">
                 Submit
             </button>
-        </>
+        </div>
     );
 };
 export default AddTodo;
