@@ -35,12 +35,12 @@ const App = () => {
     return (
         <div className="bg-yellow-50">
             <nav className="flex justify-between p-[1rem]">
-                <Link to="/">
+                <Link title="Home" to="/">
                     <BiHomeAlt className="text-[2rem] fill-black" />
                 </Link>
                 <p className="text-2xl font-bold">Todo List: </p>
                 <Navbar>
-                    <NavItem icon={<FiSettings className="text-[2rem]" />}>
+                    <NavItem icon={<FiSettings title="Settings" className="text-[2rem]" />}>
                         <DropdownMenu />
                     </NavItem>
                 </Navbar>
@@ -54,10 +54,10 @@ const App = () => {
                 <Route path="/edit/:id" element={<p>Edit Todo</p>} />
                 <Route path="*" element={<p>404</p>} />
             </Routes>
-{/* //TODO: Use focus within or checkbox and aria-label, title */}
+            {/* //TODO: Use focus within or checkbox and aria-label, title */}
             <div className="fab-container">
                 <div className="button iconButton">
-                    <Link to="/add" className="plusIcon">
+                    <Link title="Add Todo" to="/add" className="plusIcon">
                         <BsPlusLg className="text-[1rem]" />
                     </Link>
                 </div>

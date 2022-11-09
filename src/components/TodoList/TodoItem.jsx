@@ -57,19 +57,25 @@ const TodoItem = (todoItem) => {
             <p className="todo-text font-medium">{todoItemData.title}</p>
             <p className="todo-text italic">{todoItemData.description}</p>
             <button
-                className="bg-red-500 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
-                onClick={() => handleDeleteTodo(todoItemData)}>
-                <AiOutlineDelete />
-            </button>
-            <button
-                className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8"
+                title="Edit Todo"
+                className={`bg-${
+                    todoItemData.completed ? "blue-500 opacity-50" : "blue-500"
+                } text-white font-medium px-2 py-1 rounded hover:bg-blue-900" h-8`}
+                disabled={todoItemData.completed}
                 onClick={() => handleEditTodo(todoItemData)}>
                 <AiOutlineEdit />
             </button>
             <button
+                title="Complete Todo"
                 className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8"
                 onClick={() => toggleCompleteTodo()}>
                 <MdOutlineDone />
+            </button>
+            <button
+                title="Delete Todo"
+                className="bg-red-600 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
+                onClick={() => handleDeleteTodo(todoItemData)}>
+                <AiOutlineDelete />
             </button>
         </div>
     );

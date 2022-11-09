@@ -52,7 +52,7 @@ const AddTodo = (todos, setTodos) => {
                     <option value="medium_high">Medium High</option>
                     <option value="medium">Medium</option>
                     <option value="medium_low">Medium Low</option>
-                    <option value="low">Low</option>
+                    <option selected value="low">Low</option>
                 </select>
             </form>
             <button className="bg-[#60C689] text-white font-medium px-2 py-1 mt-10 rounded hover:bg-blue-900" type="submit" form="todos-form">
