@@ -1,34 +1,13 @@
 import { useState, useEffect } from "react";
-import { AiOutlineEdit, AiOutlineDelete, MdOutlineDone, TbArrowsUp } from "react-icons/all";
+import { AiOutlineEdit, AiOutlineDelete, MdOutlineDone } from "react-icons/all";
 import PriorityIcon from "./PriorityIcon.jsx";
 import axios from "axios";
-
-const todoContainerColor = {
-    high: {
-        gradient: "from-red-400",
-        border: "border-red-500",
-    },
-    medium_high: {
-        gradient: "from-amber-400",
-        border: "border-amber-500",
-    },
-    medium: {
-        gradient: "from-yellow-300",
-        border: "border-yellow-400",
-    },
-    medium_low: {
-        gradient: "from-green-300",
-        border: "border-green-400",
-    },
-    low: {
-        gradient: "from-green-500",
-        border: "border-green-600",
-    },
-};
+import { todoContainerColor } from "../../common/utils.js";
 
 const TodoItem = (todoItem = {}) => {
     const todoItemData = todoItem.todoItem;
     const priority = todoItemData.priority;
+    const emptyField = "N/A";
 
     const handleDeleteTodo = (todoItem) => {
         axios
@@ -54,7 +33,7 @@ const TodoItem = (todoItem = {}) => {
         <div
             className={`flex justify-between space-x-5 border-solid border-2 ${todoContainerColor[priority].border} rounded-lg my-2 h-14 items-center p-4 bg-gradient-to-l ${todoContainerColor[priority].gradient}`}>
             <PriorityIcon todoItemData={todoItemData} />
-            <p className="todo-text font-medium">{todoItemData.title}</p>
+            <p className="todo-text font-medium">{todoItemData.title || emptyField}</p>
             <p className="todo-text italic">{todoItemData.description}</p>
             <button
                 title="Edit Todo"

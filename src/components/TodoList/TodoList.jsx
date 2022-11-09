@@ -4,7 +4,6 @@ import TodoItem from "./TodoItem.jsx";
 const TodoList = ({ todos = [], isLoading }) => {
     const [ongoingTodos, setOngoingTodos] = useState([]);
     const [completedTodos, setCompletedTodos] = useState([]);
-
     const showCompletedSetting = localStorage.getItem("completed");
 
     useEffect(() => {

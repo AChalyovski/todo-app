@@ -12,7 +12,7 @@ const AddTodo = ({ todos = [], setTodos }) => {
     });
 
     const data = {
-        id: todos.length + 1,
+        id: new Date().getTime(),
         completed: false,
         timeOfCompletion: null,
         ...formData,
@@ -63,7 +63,7 @@ const AddTodo = ({ todos = [], setTodos }) => {
                 </select>
             </form>
             <button
-                className="bg-[#60C689] text-white font-medium px-2 py-1 mt-10 rounded hover:bg-blue-900"
+                className="bg-orange-600 text-white font-medium px-2 py-1 mt-10 rounded hover:bg-orange-700"
                 type="submit"
                 form="todos-form">
                 Submit
