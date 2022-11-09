@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AddTodo = (todos, setTodos) => {
+const AddTodo = ({ todos = [], setTodos }) => {
     const navigateTo = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const AddTodo = (todos, setTodos) => {
     };
 
     const handleCreateTodo = (event) => {
-    //TODO: Use event.preventDefault()
+        //TODO: Use event.preventDefault()
         axios
             .post(import.meta.env.VITE_TODO_API, data)
             .then((res) => setTodos([...todos, res.data]))
@@ -35,9 +35,16 @@ const AddTodo = (todos, setTodos) => {
 
     return (
         <div className="p-10 flex flex-col items-center justify-center">
-        <p className="text-xl text-gray-500 font-bold text-center mb-10">Add New todo</p>
+            <p className="text-xl text-gray-500 font-bold text-center mb-10">Add New todo</p>
             <form className="flex flex-col" id="todos-form" onSubmit={handleCreateTodo}>
-                <input className="mb-4" type="text" name="title" placeholder={"To do"} value={formData.title} onChange={handleChange} />
+                <input
+                    className="mb-4"
+                    type="text"
+                    name="title"
+                    placeholder={"To do"}
+                    value={formData.title}
+                    onChange={handleChange}
+                />
                 <input
                     type="text"
                     name="description"
@@ -47,15 +54,18 @@ const AddTodo = (todos, setTodos) => {
                     className="mb-4"
                 />
                 <label>Priority</label>
-                <select id="priority" name="priority" onChange={handleChange}>
+                <select id="priority" defaultValue="low" name="priority" onChange={handleChange}>
                     <option value="high">High</option>
                     <option value="medium_high">Medium High</option>
                     <option value="medium">Medium</option>
                     <option value="medium_low">Medium Low</option>
-                    <option selected value="low">Low</option>
+                    <option value="low">Low</option>
                 </select>
             </form>
-            <button className="bg-[#60C689] text-white font-medium px-2 py-1 mt-10 rounded hover:bg-blue-900" type="submit" form="todos-form">
+            <button
+                className="bg-[#60C689] text-white font-medium px-2 py-1 mt-10 rounded hover:bg-blue-900"
+                type="submit"
+                form="todos-form">
                 Submit
             </button>
         </div>

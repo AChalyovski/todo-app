@@ -8,22 +8,14 @@
     }
 
     .button {
-        width: 3.5rem;
-        height: 3.5rem;
-        border-radius: 100%;
-        background: #60C689;
-        box-shadow: 0.3em 0.3em 0.4em #AAAAAA70;
+        @apply w-12 h-12 rounded-full shadow-md bg-orange-600 hover:bg-orange-700 ;
     }
 
     .plusIcon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        color: white;
+        @apply h-full text-white flex justify-center items-center;
     }
 
     .todo-text {
-        @apply w-40 text-ellipsis overflow-hidden whitespace-nowrap
+        @apply w-40 truncate
     }
 }

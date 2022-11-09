@@ -48,7 +48,7 @@ const App = () => {
             <Routes>
                 <Route
                     path="/"
-                    element={<TodoList todos={todos} isLoading={isLoading} setIsLoading={setIsLoading} />}
+                    element={<TodoList todos={todos} isLoading={isLoading}/>}
                 />
                 <Route path="/add" element={<AddTodo todos={todos} setTodos={setTodos} />} />
                 <Route path="/edit/:id" element={<p>Edit Todo</p>} />
