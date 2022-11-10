@@ -19,7 +19,7 @@ const App = () => {
         localStorage.setItem("view", "list");
         localStorage.setItem("completed", false);
     };
-
+    //TODO Extract it in the utils
     const getAllTodos = () => {
         setIsLoading(true);
         axios
@@ -47,7 +47,7 @@ const App = () => {
                 </Navbar>
             </nav>
             <Routes>
-                <Route path="/" element={<TodoList todos={todos} isLoading={isLoading} />} />
+                <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} isLoading={isLoading} />} />
                 <Route path="/add" element={<AddTodo todos={todos} setTodos={setTodos} />} />
                 <Route path="/edit/:id" element={<p>Edit Todo</p>} />
                 <Route path="*" element={<p>404</p>} />

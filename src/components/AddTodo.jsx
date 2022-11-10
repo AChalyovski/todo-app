@@ -26,11 +26,11 @@ const AddTodo = ({ todos = [], setTodos }) => {
     };
 
     const handleCreateTodo = (event) => {
-        //TODO: Use event.preventDefault()
         axios
             .post(import.meta.env.VITE_TODO_API, data)
             .then((res) => setTodos([...todos, res.data]))
             .then(navigateTo("/"));
+        event.preventDefault();
     };
 
     return (

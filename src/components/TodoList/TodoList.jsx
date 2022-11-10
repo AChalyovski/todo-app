@@ -26,7 +26,7 @@ const TodoList = ({ todos = [], isLoading }) => {
         <div>
             <div className="p-4">
                 {ongoingTodos.map((todoItem) => (
-                    <TodoItem key={todoItem.id} todoItem={todoItem} />
+                    <TodoItem key={todoItem.id} todoItem={todoItem} todos={ongoingTodos}/>
                 ))}
             </div>
             <div>

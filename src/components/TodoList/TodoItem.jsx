@@ -4,17 +4,17 @@ import PriorityIcon from "./PriorityIcon.jsx";
 import axios from "axios";
 import { todoContainerColor } from "../../common/utils.js";
 
-const TodoItem = (todoItem = {}) => {
-    const todoItemData = todoItem.todoItem;
-    const priority = todoItemData.priority;
+const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
+    const priority = todoItem.priority;
     const emptyField = "N/A";
 
     const handleDeleteTodo = (todoItem) => {
         axios
             .delete(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`)
-            //             .then(setIsLoading(true))
+            .then((res) => setTodos(res.data))
             .catch((err) => console.log(err));
     };
+
 
     const handleEditTodo = (todoItem) => {
         console.log("Editing ", todoItem);
@@ -22,9 +22,9 @@ const TodoItem = (todoItem = {}) => {
 
     const toggleCompleteTodo = () => {
         axios
-            .put(`${import.meta.env.VITE_TODO_API}/${todoItemData.id}`, {
-                ...todoItemData,
-                completed: !todoItemData.completed,
+            .put(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`, {
+                ...todoItem,
+                completed: !todoItem.completed,
             })
             .catch((err) => console.log(err));
     };
@@ -32,16 +32,16 @@ const TodoItem = (todoItem = {}) => {
     return (
         <div
             className={`flex justify-between space-x-5 border-solid border-2 ${todoContainerColor[priority].border} rounded-lg my-2 h-14 items-center p-4 bg-gradient-to-l ${todoContainerColor[priority].gradient}`}>
-            <PriorityIcon todoItemData={todoItemData} />
-            <p className="todo-text font-medium">{todoItemData.title || emptyField}</p>
-            <p className="todo-text italic">{todoItemData.description}</p>
+            <PriorityIcon todoItem={todoItem} />
+            <p className="todo-text font-medium">{todoItem.title || emptyField}</p>
+            <p className="todo-text italic">{todoItem.description}</p>
             <button
                 title="Edit Todo"
                 className={`bg-${
-                    todoItemData.completed ? "blue-500 opacity-50" : "blue-500"
+                    todoItem.completed ? "blue-500 opacity-50" : "blue-500"
                 } text-white font-medium px-2 py-1 rounded hover:bg-blue-900" h-8`}
-                disabled={todoItemData.completed}
-                onClick={() => handleEditTodo(todoItemData)}>
+                disabled={todoItem.completed}
+                onClick={() => handleEditTodo(todoItem)}>
                 <AiOutlineEdit />
             </button>
             <button
@@ -53,7 +53,7 @@ const TodoItem = (todoItem = {}) => {
             <button
                 title="Delete Todo"
                 className="bg-red-600 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
-                onClick={() => handleDeleteTodo(todoItemData)}>
+                onClick={() => handleDeleteTodo(todoItem)}>
                 <AiOutlineDelete />
             </button>
         </div>

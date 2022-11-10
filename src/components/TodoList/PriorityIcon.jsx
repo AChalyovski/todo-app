@@ -10,10 +10,10 @@ const priorityIcons = {
     low: <HiChevronDoubleDown className="text-3xl fill-green-600 cursor-pointer" />,
 };
 
-const PriorityIcon = (todoItemData = {}) => {
-    const priority = todoItemData.todoItemData.priority;
+const PriorityIcon = ({ todoItem = {} }) => {
+    const priority = todoItem.priority;
 
-    if (todoItemData.todoItemData.completed) {
+    if (todoItem.completed) {
         return <GrCompliance className="text-xl ml-1 fill-red-500 cursor-pointer" />;
     }
 
