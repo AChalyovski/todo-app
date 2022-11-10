@@ -10,7 +10,7 @@ import NavItem from "./components/NavItem/NavItem";
 import { defaultTodo } from "./common/utils.js";
 
 const App = () => {
-    const [todos, setTodos] = useState([defaultTodo]);
+    const [todos, setTodos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isListView, setIsListView] = useState(true);
 
@@ -21,12 +21,16 @@ const App = () => {
     };
     //TODO Extract it in the utils
     const getAllTodos = () => {
-        setIsLoading(true);
         axios
             .get(import.meta.env.VITE_TODO_API)
             .then((res) => setTodos(res.data))
-            .then(setIsLoading(false));
     };
+
+    useEffect(()=>{
+        if(todos.length){
+            setIsLoading(false);
+        }
+    },[todos])
 
     useEffect(() => {
         populateDefaultSettings();

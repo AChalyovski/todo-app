@@ -8,15 +8,18 @@ const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
     const priority = todoItem.priority;
     const emptyField = "N/A";
 
-    const handleDeleteTodo = (todoItem) => {
+    const handleDeleteTodo = () => {
         axios
             .delete(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`)
-            .then((res) => setTodos(res.data))
+            .then(
+                setTodos((prev) => {
+                    return prev.filter((item) => item.id != todoItem.id);
+                })
+            )
             .catch((err) => console.log(err));
     };
 
-
-    const handleEditTodo = (todoItem) => {
+    const handleEditTodo = () => {
         console.log("Editing ", todoItem);
     };
 
@@ -26,6 +29,8 @@ const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
                 ...todoItem,
                 completed: !todoItem.completed,
             })
+            .then(res => {
+            setTodos(prev => prev.map(item => item.id === res.id? res:item))})
             .catch((err) => console.log(err));
     };
 
@@ -41,7 +46,7 @@ const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
                     todoItem.completed ? "blue-500 opacity-50" : "blue-500"
                 } text-white font-medium px-2 py-1 rounded hover:bg-blue-900" h-8`}
                 disabled={todoItem.completed}
-                onClick={() => handleEditTodo(todoItem)}>
+                onClick={() => handleEditTodo()}>
                 <AiOutlineEdit />
             </button>
             <button
@@ -53,7 +58,7 @@ const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
             <button
                 title="Delete Todo"
                 className="bg-red-600 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
-                onClick={() => handleDeleteTodo(todoItem)}>
+                onClick={() => handleDeleteTodo()}>
                 <AiOutlineDelete />
             </button>
         </div>

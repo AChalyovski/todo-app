@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import TodoItem from "./TodoItem.jsx";
 
-const TodoList = ({ todos = [], isLoading }) => {
-    const [ongoingTodos, setOngoingTodos] = useState([]);
-    const [completedTodos, setCompletedTodos] = useState([]);
+const TodoList = ({ todos = [], isLoading, setTodos }) => {
+    const completedTodos = todos.filter((item) => item.completed);
+    const ongoingTodos = todos.filter((item) => !item.completed);
+
     const showCompletedSetting = localStorage.getItem("completed");
 
     useEffect(() => {
-        setOngoingTodos(todos.filter((item) => item.completed === false));
-        setCompletedTodos(todos.filter((item) => item.completed === true));
+        if (todos?.length) {
+            setTodos(todos);
+        }
     }, [todos]);
 
     if (isLoading) {
@@ -26,7 +28,7 @@ const TodoList = ({ todos = [], isLoading }) => {
         <div>
             <div className="p-4">
                 {ongoingTodos.map((todoItem) => (
-                    <TodoItem key={todoItem.id} todoItem={todoItem} todos={ongoingTodos}/>
+                    <TodoItem key={todoItem.id} todoItem={todoItem} todos={ongoingTodos} setTodos={setTodos} />
                 ))}
             </div>
             <div>
