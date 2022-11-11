@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineDelete, MdOutlineDone } from "react-icons/all";
 import PriorityIcon from "./PriorityIcon.jsx";
 import axios from "axios";

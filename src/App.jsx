@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import { Route, Routes, Link } from "react-router-dom";
-import AddTodo from "./components/AddTodo";
+import AddTodo from "./components/Actions/AddTodo";
 import axios from "axios";
 import { BsPlusLg, FiSettings, BiHomeAlt } from "react-icons/all";
-import DropdownMenu from "./components/DropdownMenu/DropdownMenu.jsx";
-import Navbar from "./components/Navbar/Navbar";
-import NavItem from "./components/NavItem/NavItem";
-import { defaultTodo } from "./common/utils.js";
+import { BsUiChecksGrid, BsUiChecks, BiShow, BiHide, MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/all";
+import ToggledIcons from "./components/Actions/ToggledIcons";
+
 
 const App = () => {
     const [todos, setTodos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const populateDefaultSettings = () => {
-        localStorage.setItem("theme", "light");
-        localStorage.setItem("view", "list");
-        localStorage.setItem("completed", false);
-    };
+    const listView = false;
     //TODO Extract it in the utils
     const getAllTodos = () => {
         axios
@@ -32,22 +26,34 @@ const App = () => {
     }, [todos])
 
     useEffect(() => {
-        populateDefaultSettings();
         getAllTodos();
     }, []);
 
     return (
-        <div className="bg-yellow-50 dark:bg-black">
+        <div className="h-screen bg-yellow-50 dark:bg-purple-500">
             <nav className="flex justify-between p-4">
                 <Link title="Home" to="/">
                     <BiHomeAlt className="text-4xl fill-black" />
                 </Link>
                 <p className="text-2xl font-bold">Todo List: </p>
-                <Navbar>
-                    <NavItem icon={<FiSettings title="Settings" className="text-4xl" />}>
-                        <DropdownMenu />
-                    </NavItem>
-                </Navbar>
+                <div className="flex">
+                    <ToggledIcons id="listView" active={localStorage.getItem("listView")}>
+                        <BsUiChecks />
+                        <BsUiChecksGrid />
+                    </ToggledIcons>
+
+                    <ToggledIcons id="showCompleted" active={localStorage.getItem("showCompleted")}>
+                        <BiShow />
+                        <BiHide />
+                    </ToggledIcons>
+
+                    <ToggledIcons id="lightTheme" active={localStorage.getItem("lightTheme")}>
+                        <MdOutlineLightMode />
+                        <MdOutlineDarkMode />
+                    </ToggledIcons>
+
+                </div>
+
             </nav>
             <Routes>
                 <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} isLoading={isLoading} />} />

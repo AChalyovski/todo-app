@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TodoItem from "./TodoItem.jsx";
 
 const TodoList = ({ todos = [], isLoading, setTodos }) => {
     const completedTodos = todos.filter((item) => item.completed);
     const ongoingTodos = todos.filter((item) => !item.completed);
-
-    const showCompletedSetting = localStorage.getItem("completed");
 
     useEffect(() => {
         if (todos?.length) {
@@ -13,15 +11,16 @@ const TodoList = ({ todos = [], isLoading, setTodos }) => {
         }
     }, [todos]);
 
+    if (todos.length === 0) {
+        return <p className="text-4xl fill-black text-center" >No Data</p>;
+    }
+
     if (isLoading) {
         return (
             <div>
-                <p>Loading...</p>
+                <p className="text-4xl fill-black text-center">Loading...</p>
             </div>
         );
-    }
-    if (todos.length === 0) {
-        return <p>No Data</p>;
     }
     // TODO: Make interface for todos object
     return (
