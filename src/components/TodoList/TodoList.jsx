@@ -1,49 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TodoItem from "./TodoItem.jsx";
 
-const TodoList = ({ todos = [], isLoading }) => {
-    const [ongoingTodos, setOngoingTodos] = useState([]);
-    const [completedTodos, setCompletedTodos] = useState([]);
-
-    const showCompletedSetting = localStorage.getItem("completed");
+const TodoList = ({ todos = [], isLoading, setTodos }) => {
+    const completedTodos = todos.filter((item) => item.completed);
+    const ongoingTodos = todos.filter((item) => !item.completed);
 
     useEffect(() => {
-        setOngoingTodos(todos.filter((item) => item.completed === false));
-        setCompletedTodos(todos.filter((item) => item.completed === true));
+        if (todos?.length) {
+            setTodos(todos);
+        }
     }, [todos]);
 
-    const show = showCompletedSetting && completedTodos.length;
-
-    console.log(show);
+    if (todos.length === 0) {
+        return <p className="text-4xl fill-black text-center" >No Data</p>;
+    }
 
     if (isLoading) {
         return (
             <div>
-                <p>Loading...</p>
+                <p className="text-4xl fill-black text-center">Loading...</p>
             </div>
         );
     }
-    if (todos.length === 0) {
-        return <p>No Data</p>;
-    }
     // TODO: Make interface for todos object
     return (
-        <div>
-            <div className="p-4">
+        <div className="px-96 pt-4">
+            <div>
                 {ongoingTodos.map((todoItem) => (
-                    <TodoItem key={todoItem.id} todoItem={todoItem} />
+                    <TodoItem key={todoItem.id} todoItem={todoItem} todos={ongoingTodos} setTodos={setTodos} />
                 ))}
             </div>
-            {show === 1 && (
+            <div>
+                <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
                 <div>
-                    <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
-                    <div className="p-4">
-                        {completedTodos.map((completedTodo) => (
-                            <TodoItem key={completedTodo.id} todoItem={completedTodo} />
-                        ))}
-                    </div>
+                    {completedTodos.map((completedTodo) => (
+                        <TodoItem key={completedTodo.id} todoItem={completedTodo} />
+                    ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

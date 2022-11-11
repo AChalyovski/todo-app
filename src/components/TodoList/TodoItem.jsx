@@ -1,86 +1,64 @@
-import { useState, useEffect } from "react";
-import { AiOutlineEdit, AiOutlineDelete, MdOutlineDone, TbArrowsUp } from "react-icons/all";
+import { AiOutlineEdit, AiOutlineDelete, MdOutlineDone } from "react-icons/all";
 import PriorityIcon from "./PriorityIcon.jsx";
 import axios from "axios";
+import { todoContainerColor } from "../../common/utils.js";
 
-const TodoItem = (todoItem) => {
-    const todoItemData = todoItem.todoItem;
-    const [gradientColor, setGradientColor] = useState("from-yellow-100");
-    const [borderColor, setBorderColor] = useState("border-black");
+const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
+    const priority = todoItem.priority;
+    const emptyField = "N/A";
 
-    const handleDeleteTodo = (todoItem) => {
-        axios
-            .delete(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`)
-            //             .then(setIsLoading(true))
-            .catch((err) => console.log(err));
-    };
-
-    const handleEditTodo = (todoItem) => {
+    const handleEditTodo = () => {
         console.log("Editing ", todoItem);
     };
 
     const toggleCompleteTodo = () => {
         axios
-            .put(`${import.meta.env.VITE_TODO_API}/${todoItemData.id}`, {
-                ...todoItemData,
-                completed: !todoItemData.completed,
+            .put(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`, {
+                ...todoItem,
+                completed: !todoItem.completed,
+            })
+            .then((res) => {
+                setTodos((prev) => prev.map((item) => (item.id === res.id ? res : item)));
             })
             .catch((err) => console.log(err));
     };
 
-    const changeTodoColor = (priority) => {
-        switch (priority) {
-            case "high":
-                setGradientColor("from-red-400");
-                setBorderColor("border-red-500");
-                break;
-            case "medium high":
-                setGradientColor("from-amber-400");
-                setBorderColor("border-amber-500");
-                break;
-            case "medium":
-                setGradientColor("from-yellow-300");
-                setBorderColor("border-yellow-400");
-                break;
-            case "medium low":
-                setGradientColor("from-green-300");
-                setBorderColor("border-green-400");
-                break;
-            case "low":
-                setGradientColor("from-green-500");
-                setBorderColor("border-green-600");
-                break;
-        }
-        if (todoItemData.completed === true) {
-            setGradientColor("from-gray-500");
-            setBorderColor("border-black-500");
-        }
+    const handleDeleteTodo = () => {
+        axios
+            .delete(`${import.meta.env.VITE_TODO_API}/${todoItem.id}`)
+            .then(
+                setTodos((prev) => {
+                    return prev.filter((item) => item.id != todoItem.id);
+                })
+            )
+            .catch((err) => console.log(err));
     };
-
-    useEffect(() => {
-        changeTodoColor(todoItemData.priority);
-    }, [todoItemData]);
 
     return (
         <div
-            className={`flex justify-between space-x-5 border-solid border-2 ${borderColor} rounded-lg my-2 h-14 items-center p-4 bg-gradient-to-l ${gradientColor}`}>
-            <PriorityIcon todoItemData={todoItemData} />
-            <p className="table-cell font-medium">{todoItemData.title}</p>
-            <p className="table-cell italic">{todoItemData.description}</p>
+            className={`flex justify-between space-x-5 border-solid border-2 ${todoContainerColor[priority].border} rounded-lg my-2 h-14 items-center p-4 bg-gradient-to-l ${todoContainerColor[priority].gradient}`}>
+            <PriorityIcon todoItem={todoItem} />
+            <p className="todo-text font-medium">{todoItem.title || emptyField}</p>
+            <p className="todo-text italic">{todoItem.description}</p>
             <button
-                className="bg-red-500 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
-                onClick={() => handleDeleteTodo(todoItemData)}>
-                <AiOutlineDelete />
-            </button>
-            <button
-                className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8"
-                onClick={() => handleEditTodo(todoItemData)}>
+                title="Edit Todo"
+                className={`bg-blue-500 ${todoItem.completed ? "opacity-50" : null
+                    } text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8`}
+                disabled={todoItem.completed}
+                onClick={() => handleEditTodo()}>
                 <AiOutlineEdit />
             </button>
             <button
+                title="Complete Todo"
                 className="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8"
                 onClick={() => toggleCompleteTodo()}>
                 <MdOutlineDone />
+            </button>
+            <button
+                title="Delete Todo"
+                className="bg-red-600 text-white font-medium px-2 py-1 rounded hover:bg-red-900 h-8"
+                onClick={() => handleDeleteTodo()}>
+                <AiOutlineDelete />
             </button>
         </div>
     );

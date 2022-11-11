@@ -6,24 +6,16 @@
     .fab-container {
         @apply fixed bottom-20 right-20 cursor-pointer
     }
-    
+
     .button {
-        width: 3.5rem;
-        height: 3.5rem;
-        border-radius: 100%;
-        background: #60C689;
-        box-shadow: 0.3em 0.3em 0.4em #AAAAAA70;
+        @apply w-12 h-12 rounded-full shadow-md bg-orange-600;
     }
 
     .plusIcon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        color: white;
+        @apply h-full text-white flex justify-center items-center;
     }
 
-    .table-cell {
-        @apply w-80
+    .todo-text {
+        @apply w-40 truncate
     }
 }
