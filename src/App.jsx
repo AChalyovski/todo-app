@@ -12,7 +12,6 @@ import { defaultTodo } from "./common/utils.js";
 const App = () => {
     const [todos, setTodos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isListView, setIsListView] = useState(true);
 
     const populateDefaultSettings = () => {
         localStorage.setItem("theme", "light");
@@ -26,11 +25,11 @@ const App = () => {
             .then((res) => setTodos(res.data))
     };
 
-    useEffect(()=>{
-        if(todos.length){
+    useEffect(() => {
+        if (todos.length) {
             setIsLoading(false);
         }
-    },[todos])
+    }, [todos])
 
     useEffect(() => {
         populateDefaultSettings();
@@ -38,7 +37,7 @@ const App = () => {
     }, []);
 
     return (
-        <div className="bg-yellow-50">
+        <div className="bg-yellow-50 dark:bg-black">
             <nav className="flex justify-between p-4">
                 <Link title="Home" to="/">
                     <BiHomeAlt className="text-4xl fill-black" />
@@ -58,7 +57,7 @@ const App = () => {
             </Routes>
             {/* //TODO: Use focus within or checkbox and aria-label, title */}
             <div className="fab-container">
-                <div className="button iconButton">
+                <div className="button iconButton hover:bg-orange-700 ">
                     <Link title="Add Todo" to="/add" className="plusIcon">
                         <BsPlusLg className="text-lg" />
                     </Link>

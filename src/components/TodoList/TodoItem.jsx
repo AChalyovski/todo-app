@@ -43,9 +43,8 @@ const TodoItem = ({ todoItem = {}, todos = [], setTodos }) => {
             <p className="todo-text italic">{todoItem.description}</p>
             <button
                 title="Edit Todo"
-                className={`bg-${
-                    todoItem.completed ? "blue-500 opacity-50" : "blue-500"
-                } text-white font-medium px-2 py-1 rounded hover:bg-blue-900" h-8`}
+                className={`bg-blue-500 ${todoItem.completed ? "opacity-50" : null
+                    } text-white font-medium px-2 py-1 rounded hover:bg-blue-900 h-8`}
                 disabled={todoItem.completed}
                 onClick={() => handleEditTodo()}>
                 <AiOutlineEdit />

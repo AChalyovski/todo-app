@@ -1,16 +1,8 @@
 {
   "todos": [
     {
-      "id": 1668096088833,
-      "completed": false,
-      "timeOfCompletion": null,
-      "title": "4",
-      "description": "",
-      "priority": "low"
-    },
-    {
       "id": 1668097497512,
-      "completed": true,
+      "completed": false,
       "timeOfCompletion": null,
       "title": "1",
       "description": "",
@@ -38,6 +30,14 @@
       "timeOfCompletion": null,
       "title": "4",
       "description": "",
+      "priority": "low"
+    },
+    {
+      "id": 1668108141081,
+      "completed": false,
+      "timeOfCompletion": null,
+      "title": "asd",
+      "description": "asd",
       "priority": "low"
     }
   ]

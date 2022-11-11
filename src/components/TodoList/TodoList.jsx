@@ -25,15 +25,15 @@ const TodoList = ({ todos = [], isLoading, setTodos }) => {
     }
     // TODO: Make interface for todos object
     return (
-        <div>
-            <div className="p-4">
+        <div className="px-96 pt-4">
+            <div>
                 {ongoingTodos.map((todoItem) => (
                     <TodoItem key={todoItem.id} todoItem={todoItem} todos={ongoingTodos} setTodos={setTodos} />
                 ))}
             </div>
             <div>
                 <p className="text-xl text-gray-500 font-bold text-center">Completed Todos:</p>
-                <div className="p-4">
+                <div>
                     {completedTodos.map((completedTodo) => (
                         <TodoItem key={completedTodo.id} todoItem={completedTodo} />
                     ))}
